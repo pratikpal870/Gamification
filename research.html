@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pratik Pal | Research Proposal</title>
+  <meta name="description" content="PhD Research Proposal: Gamification Strategies for Enhancing Collaboration in Virtual Teams and Improving Performance in Esports." />
+
+  <style>
+    :root{
+      --bg0:#070a14;
+      --bg1:#0b1227;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(0,0,0,.16);
+      --line: rgba(255,255,255,.14);
+      --text:#f2f5ff;
+      --muted: rgba(242,245,255,.78);
+
+      --accent1:#7c3aed;
+      --accent2:#06b6d4;
+      --accent3:#22c55e;
+      --accent4:#f59e0b;
+
+      --shadow: 0 14px 34px rgba(0,0,0,.35);
+      --radius: 16px;
+      --radius2: 22px;
+
+      --max: 1100px;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(900px 450px at 15% 10%, rgba(124,58,237,.35), transparent 60%),
+        radial-gradient(900px 450px at 80% 0%, rgba(6,182,212,.25), transparent 60%),
+        radial-gradient(900px 520px at 70% 90%, rgba(34,197,94,.20), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg0) 70%);
+      min-height:100vh;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 16px 70px;}
+
+    /* Sticky header */
+    .topbar{
+      position: sticky;
+      top: 10px;
+      z-index: 10;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900; letter-spacing:.2px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(124,58,237,.18);
+    }
+    .nav{display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
+    .nav a{
+      text-decoration:none;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .nav a:hover{transform: translateY(-1px); background: rgba(255,255,255,.1);}
+    .nav .cta{
+      background: linear-gradient(135deg, rgba(124,58,237,.85), rgba(6,182,212,.65));
+      border-color: rgba(255,255,255,.18);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top:14px;
+      border-radius: var(--radius2);
+      border:1px solid var(--line);
+      background:
+        linear-gradient(120deg, rgba(124,58,237,.55), rgba(6,182,212,.30), rgba(34,197,94,.22)),
+        rgba(255,255,255,.06);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .heroInner{
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:14px;
+      padding:20px 20px 14px;
+    }
+    @media(max-width:900px){ .heroInner{grid-template-columns:1fr;} }
+
+    h1{margin:0; font-size: 28px; line-height:1.15;}
+    .subtitle{margin:10px 0 0; color: rgba(255,255,255,.92); font-size: 14px;}
+    .chips{margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;}
+    .chip{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+      color: rgba(255,255,255,.92);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .chip.p{border-color: rgba(124,58,237,.35);}
+    .chip.c{border-color: rgba(6,182,212,.35);}
+    .chip.g{border-color: rgba(34,197,94,.35);}
+    .chip.y{border-color: rgba(245,158,11,.45);}
+
+    .meta{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.14);
+      padding:14px;
+    }
+    .metaRow{display:flex; justify-content:space-between; gap:12px; margin:8px 0;}
+    .k{color: rgba(255,255,255,.72); font-size:12px;}
+    .v{font-weight:900; font-size: 13px; text-align:right;}
+    .mono{font-family: var(--mono);}
+
+    .btnRow{display:flex; flex-wrap:wrap; gap:10px; padding: 0 20px 18px;}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.14);
+      color: var(--text);
+      text-decoration:none;
+      font-weight:900;
+      font-size: 13px;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(0,0,0,.20);}
+    .btn.primary{background: linear-gradient(135deg, rgba(124,58,237,.82), rgba(6,182,212,.62));}
+    .btn.green{background: linear-gradient(135deg, rgba(34,197,94,.78), rgba(6,182,212,.50));}
+    .btn .sq{width:10px; height:10px; border-radius:3px; background: rgba(255,255,255,.85); box-shadow: 0 0 0 4px rgba(255,255,255,.14);}
+
+    /* Sections */
+    .section{margin-top:14px;}
+    .card{
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 28px rgba(0,0,0,.22);
+      padding:16px;
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size: 16px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      letter-spacing:.2px;
+    }
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.14);
+      color: rgba(255,255,255,.9);
+      white-space:nowrap;
+    }
+    .muted{color: var(--muted); font-size: 14px; margin:0;}
+    ul{margin:10px 0 0 18px; color: rgba(255,255,255,.88); font-size: 13px;}
+    li{margin:6px 0;}
+
+    /* Headline buttons (accordion) */
+    details{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+      border-radius: 14px;
+      padding:10px 12px;
+      margin-top:10px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      font-weight:950;
+      font-size: 13px;
+    }
+    summary::-webkit-details-marker{display:none;}
+    .arrow{
+      width:10px; height:10px;
+      border-right:2px solid rgba(255,255,255,.8);
+      border-bottom:2px solid rgba(255,255,255,.8);
+      transform: rotate(-45deg);
+      transition: transform .15s ease;
+    }
+    details[open] .arrow{transform: rotate(45deg);}
+    .inside{margin-top:10px; color: rgba(255,255,255,.88); font-size: 13px;}
+
+    /* Citation styling */
+    .cite{
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 900;
+      text-decoration:none;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      display:inline-block;
+      transform: translateY(-1px);
+    }
+    .cite:hover{
+      background: rgba(255,255,255,.12);
+    }
+
+    /* Reference list */
+    .refItem{
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.12);
+      margin-top:10px;
+    }
+    .refTop{
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .refNum{
+      font-family: var(--mono);
+      font-weight: 950;
+      color: rgba(255,255,255,.92);
+    }
+    .refBtns{
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .refBtn{
+      text-decoration:none;
+      font-size: 12px;
+      font-weight: 900;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+    }
+    .refBtn:hover{background: rgba(255,255,255,.12);}
+
+    footer{
+      margin-top:18px;
+      color: rgba(255,255,255,.70);
+      font-size: 12px;
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      padding: 10px 2px;
+    }
+    .kbd{
+      font-family: var(--mono);
+      padding: 6px 8px;
+      border-radius: 10px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Research Proposal</span>
+        <span style="color:rgba(255,255,255,.75); font-size:13px;">Pratik Pal</span>
+      </div>
+
+      <div class="nav">
+        <a href="#abstract">Abstract</a>
+        <a href="#objectives">Objectives</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#references">References</a>
+        <a class="cta" href="https://pratikpal870.github.io/">Main Portfolio</a>
+      </div>
+    </div>
+
+    <header class="hero">
+      <div class="heroInner">
+        <div>
+          <h1>Gamification Strategies for Enhancing Collaboration in Virtual Teams and Improving Performance in Esports</h1>
+          <p class="subtitle">
+            This PhD proposal investigates how gamification can reduce collaboration challenges in geographically distributed esports teams,
+            and whether collaboration gains translate into measurable performance outcomes
+            <a class="cite" href="#ref-1">[one]</a>.
+          </p>
+
+          <div class="chips">
+            <span class="chip p">Gamification</span>
+            <span class="chip c">Virtual Teams</span>
+            <span class="chip g">Esports Performance</span>
+            <span class="chip y">Mixed Methods</span>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="metaRow"><div class="k">Author</div><div class="v">Pratik Pal</div></div>
+          <div class="metaRow"><div class="k">Email</div><div class="v mono">pratikpal27@gmail.com</div></div>
+          <div class="metaRow"><div class="k">Research type</div><div class="v">Empirical + Design</div></div>
+          <div class="metaRow"><div class="k">Planned duration</div><div class="v">Four years</div></div>
+        </div>
+      </div>
+
+      <div class="btnRow">
+        <a class="btn primary" href="proposal.pdf" target="_blank" rel="noopener">
+          <span class="sq"></span>Open Proposal PDF
+        </a>
+        <a class="btn green" href="#methodology"><span class="sq"></span>Open Methodology</a>
+        <a class="btn" href="#references"><span class="sq"></span>Open References</a>
+        <a class="btn" href="mailto:pratikpal27@gmail.com"><span class="sq"></span>Contact</a>
+      </div>
+    </header>
+
+    <section class="section card" id="abstract">
+      <h2>Abstract <span class="tag">Summary</span></h2>
+      <p class="muted">
+        Esports success depends heavily on teamwork, communication, and trust. Virtual teams face barriers that weaken collaboration and coordination.
+        This proposal examines gamification as an intervention to strengthen team interaction and engagement, and then evaluates its relationship to performance outcomes
+        <a class="cite" href="#ref-1">[one]</a>
+        <a class="cite" href="#ref-5">[five]</a>.
+      </p>
+    </section>
+
+    <section class="section card" id="objectives">
+      <h2>Objectives <span class="tag">Goals</span></h2>
+      <ul>
+        <li>Analyze gamification frameworks and identify elements suitable for esports team collaboration <a class="cite" href="#ref-1">[one]</a> <a class="cite" href="#ref-7">[seven]</a>.</li>
+        <li>Assess collaboration dynamics (communication, trust, coordination) in virtual esports teams <a class="cite" href="#ref-6">[six]</a>.</li>
+        <li>Develop tailored gamification strategies aligned to team needs and motivations <a class="cite" href="#ref-3">[three]</a> <a class="cite" href="#ref-8">[eight]</a>.</li>
+        <li>Evaluate impact on collaboration and link to measurable performance indicators <a class="cite" href="#ref-9">[nine]</a>.</li>
+      </ul>
+    </section>
+
+    <section class="section card" id="methodology">
+      <h2>Methodology <span class="tag">Headlines open as buttons</span></h2>
+
+      <details open>
+        <summary>Phase One — Literature Review <span class="arrow"></span></summary>
+        <div class="inside">
+          <ul>
+            <li>Gamified learning and theory building <a class="cite" href="#ref-1">[one]</a>.</li>
+            <li>Motivation and engagement styles in game contexts <a class="cite" href="#ref-3">[three]</a>.</li>
+            <li>Collaboration in VR / esports-oriented learning settings <a class="cite" href="#ref-6">[six]</a>.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Phase Two — Design of Gamification Strategies <span class="arrow"></span></summary>
+        <div class="inside">
+          <ul>
+            <li>Design gamification elements for cooperative and competitive teamwork behavior <a class="cite" href="#ref-8">[eight]</a>.</li>
+            <li>Apply approaches for innovation teams and collaboration incentives <a class="cite" href="#ref-7">[seven]</a>.</li>
+            <li>Consider IT service management gamification lessons as structured guidance <a class="cite" href="#ref-4">[four]</a>.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Phase Three — Data Collection & Evaluation <span class="arrow"></span></summary>
+        <div class="inside">
+          <ul>
+            <li>Use valid measurement instruments and reliability checks where relevant <a class="cite" href="#ref-2">[two]</a>.</li>
+            <li>Evaluate performance outcomes and collaboration impacts in gamified settings <a class="cite" href="#ref-9">[nine]</a>.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Phase Four — Analysis & Reporting <span class="arrow"></span></summary>
+        <div class="inside">
+          <ul>
+            <li>Link collaboration metrics to performance outcomes and interpret results using theory and evidence <a class="cite" href="#ref-1">[one]</a> <a class="cite" href="#ref-9">[nine]</a>.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="section card" id="timeline">
+      <h2>Timeline <span class="tag">Four-year plan</span></h2>
+
+      <details open>
+        <summary>Year One — Review & Research Design <span class="arrow"></span></summary>
+        <div class="inside">
+          <ul>
+            <li>Deep literature review, framework selection, ethics preparation, and measurement planning.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Year Two — Prototype & Pilot Studies <span class="arrow"></span></summary>
+        <div class="inside">
+          <ul>
+            <li>Design gamification strategies, run pilot studies, refine instrumentation and interventions.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Year Three — Full Study & Data Collection <span class="arrow"></span></summary>
+        <div class="inside">
+          <ul>
+            <li>Deploy interventions, collect quantitative and qualitative data, iterate where needed.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details>
+        <summary>Year Four — Final Analysis & Dissertation <span class="arrow"></span></summary>
+        <div class="inside">
+          <ul>
+            <li>Finalize analysis, write dissertation, publish papers, present at conferences.</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section class="section card" id="references">
+      <h2>References <span class="tag">All citations are clickable</span></h2>
+      <p class="muted">
+        In-text citations link to the matching reference below. Each reference also includes a Google Scholar link.
+      </p>
+
+      <div class="refItem" id="ref-1">
+        <div class="refTop">
+          <div>
+            <div class="refNum">[one]</div>
+            <div>Landers, R.N. (two thousand fourteen). Developing a theory of gamified learning: Linking serious games and gamification of learning. <i>Simulation &amp; Gaming</i>, forty-five(six), seven hundred fifty-two–seven hundred sixty-eight.</div>
+          </div>
+          <div class="refBtns">
+            <a class="refBtn" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=Developing%20a%20theory%20of%20gamified%20learning%3A%20Linking%20serious%20games%20and%20gamification%20of%20learning%20Landers%202014">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="refItem" id="ref-2">
+        <div class="refTop">
+          <div>
+            <div class="refNum">[two]</div>
+            <div>Korkmaz, Ö., Çakir, R., &amp; Özden, M.Y. (two thousand seventeen). A validity and reliability study of the computational thinking scales (CTS). <i>Computers in Human Behavior</i>, seventy-two, five hundred fifty-eight–five hundred sixty-nine.</div>
+          </div>
+          <div class="refBtns">
+            <a class="refBtn" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=A%20validity%20and%20reliability%20study%20of%20the%20computational%20thinking%20scales%20(CTS)%20Korkmaz%202017">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="refItem" id="ref-3">
+        <div class="refTop">
+          <div>
+            <div class="refNum">[three]</div>
+            <div>Przybylski, A.K., Weinstein, N., Ryan, R.M., &amp; Rigby, C.S. (two thousand nine). Having to versus wanting to play: Background and consequences of harmonious versus obsessive engagement in video games. <i>CyberPsychology &amp; Behavior</i>, twelve(five), four hundred eighty-five–four hundred ninety-two.</div>
+          </div>
+          <div class="refBtns">
+            <a class="refBtn" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=Having%20to%20versus%20wanting%20to%20play%3A%20Background%20and%20consequences%20of%20harmonious%20versus%20obsessive%20engagement%20in%20video%20games%20Przybylski%202009">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="refItem" id="ref-4">
+        <div class="refTop">
+          <div>
+            <div class="refNum">[four]</div>
+            <div>Trinidad, M., Orta, E., &amp; Ruiz, M. (two thousand twenty-one). Gamification in IT service management: A systematic mapping study. <i>Applied Sciences</i>, eleven(eight), three thousand three hundred eighty-four.</div>
+          </div>
+          <div class="refBtns">
+            <a class="refBtn" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=Gamification%20in%20it%20service%20management%3A%20A%20systematic%20mapping%20study%20Trinidad%202021">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="refItem" id="ref-5">
+        <div class="refTop">
+          <div>
+            <div class="refNum">[five]</div>
+            <div>Csikszentmihalyi, M. (nineteen ninety-one). <i>Flow: The Psychology of Optimal Experience</i> (reprint edition). Harper Perennial.</div>
+          </div>
+          <div class="refBtns">
+            <a class="refBtn" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=Flow%3A%20The%20Psychology%20of%20Optimal%20Experience%20Csikszentmihalyi%201991">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="refItem" id="ref-6">
+        <div class="refTop">
+          <div>
+            <div class="refNum">[six]</div>
+            <div>Dirin, A., Nieminen, M., Laine, T.H., Nieminen, L., &amp; Ghalebani, L. (two thousand twenty-three). Emotional contagion in collaborative virtual reality learning experiences: an esports approach. <i>Education and Information Technologies</i>, twenty-eight(eleven), fifteen thousand three hundred seventeen–fifteen thousand three hundred sixty-three.</div>
+          </div>
+          <div class="refBtns">
+            <a class="refBtn" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=Emotional%20contagion%20in%20collaborative%20virtual%20reality%20learning%20experiences%3A%20an%20esports%20approach%20Dirin%202023">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="refItem" id="ref-7">
+        <div class="refTop">
+          <div>
+            <div class="refNum">[seven]</div>
+            <div>Patricio, R., Moreira, A.C., &amp; Zurlo, F. (two thousand twenty-two). Gamification in innovation teams. <i>International Journal of Innovation Studies</i>, six(three), one hundred fifty-six–one hundred sixty-eight.</div>
+          </div>
+          <div class="refBtns">
+            <a class="refBtn" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=Gamification%20in%20innovation%20teams%20Patricio%202022">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="refItem" id="ref-8">
+        <div class="refTop">
+          <div>
+            <div class="refNum">[eight]</div>
+            <div>Vegt, N., Visch, V., de Ridder, H., &amp; Vermeeren, A. (two thousand fifteen). Designing gamification to guide competitive and cooperative behavior in teamwork. In <i>Gamification in Education and Business</i>, five hundred thirteen–five hundred thirty-three.</div>
+          </div>
+          <div class="refBtns">
+            <a class="refBtn" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=Designing%20gamification%20to%20guide%20competitive%20and%20cooperative%20behavior%20in%20teamwork%20Vegt%202015">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="refItem" id="ref-9">
+        <div class="refTop">
+          <div>
+            <div class="refNum">[nine]</div>
+            <div>Ho, J.C.S., Hung, Y.S., &amp; Kwan, L.Y.Y. (two thousand twenty-two). The impact of peer competition and collaboration on gamified learning performance in educational settings: a meta-analytical study. <i>Education and Information Technologies</i>, pages one–thirty-four.</div>
+          </div>
+          <div class="refBtns">
+            <a class="refBtn" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q=The%20impact%20of%20peer%20competition%20and%20collaboration%20on%20gamified%20learning%20performance%20in%20educational%20settings%3A%20a%20Meta-analytical%20study%20Ho%202022">Google Scholar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Pratik Pal</div>
+      <div class="kbd">Last updated: <span id="lastUpdated"></span></div>
+    </footer>
+
+  </div>
+
+  <script>
+    const d = new Date();
+    document.getElementById("year").textContent = d.getFullYear();
+    document.getElementById("lastUpdated").textContent =
+      d.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+  </script>
+</body>
+</html>
